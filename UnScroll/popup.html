@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  width:340px;
+  padding:20px;
+  font-family:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  background:#1a1a2e;
+  color:#e0e0e0;
+}
+h2{font-size:18px;color:#4361ee;margin-bottom:2px;letter-spacing:-0.3px}
+.tagline{font-size:11px;color:#888;margin-bottom:4px;font-style:italic}
+.version{font-size:10px;color:#555;margin-bottom:14px}
+p{font-size:13px;line-height:1.5;color:#b0b0b0;margin-bottom:12px}
+
+.section{
+  background:#16213e;
+  border:1px solid rgba(67,97,238,0.3);
+  border-radius:8px;
+  padding:12px;
+  margin:10px 0;
+}
+.section-title{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:#4361ee;
+  margin-bottom:8px;
+}
+
+.shortcut{font-size:12px;margin:5px 0;display:flex;justify-content:space-between;align-items:center}
+.shortcut-label{color:#b0b0b0}
+kbd{
+  background:#0f3460;
+  padding:2px 8px;
+  border-radius:4px;
+  font-family:monospace;
+  font-size:11px;
+  border:1px solid rgba(67,97,238,0.5);
+  color:white;
+}
+
+.site-status{
+  padding:8px 12px;
+  border-radius:6px;
+  text-align:center;
+  font-size:12px;
+  margin:10px 0;
+}
+.site-active{
+  background:rgba(76,201,240,0.1);
+  border:1px solid rgba(76,201,240,0.3);
+  color:#4cc9f0;
+}
+.site-skipped{
+  background:rgba(255,100,100,0.1);
+  border:1px solid rgba(255,100,100,0.3);
+  color:#ff6464;
+}
+
+.skip-input-row{
+  display:flex;
+  gap:6px;
+  margin-top:8px;
+}
+.skip-input{
+  flex:1;
+  padding:8px 10px;
+  background:#0f3460;
+  border:1px solid rgba(67,97,238,0.5);
+  border-radius:5px;
+  color:white;
+  font-size:12px;
+  font-family:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+  outline:none;
+}
+.skip-input:focus{
+  border-color:#4361ee;
+}
+.skip-input::placeholder{
+  color:#555;
+}
+.add-btn{
+  padding:8px 14px;
+  background:#4361ee;
+  color:white;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:600;
+  white-space:nowrap;
+}
+.add-btn:hover{
+  background:#5a7aff;
+}
+
+.skip-list{
+  margin-top:8px;
+  max-height:150px;
+  overflow-y:auto;
+}
+.skip-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:5px 8px;
+  margin:3px 0;
+  background:#0f3460;
+  border-radius:4px;
+  font-size:12px;
+}
+.skip-item-name{
+  color:#b0b0b0;
+}
+.remove-btn{
+  background:none;
+  border:none;
+  color:#ff6464;
+  cursor:pointer;
+  font-size:14px;
+  padding:0 4px;
+  font-weight:bold;
+}
+.remove-btn:hover{
+  color:#ff9090;
+}
+
+.current-site-btn{
+  width:100%;
+  padding:8px;
+  margin-top:8px;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:600;
+  border:none;
+  font-family:-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif;
+}
+.btn-disable{
+  background:#ff6464;
+  color:white;
+}
+.btn-disable:hover{
+  background:#ff8080;
+}
+.btn-enable{
+  background:#4cc9f0;
+  color:#1a1a2e;
+}
+.btn-enable:hover{
+  background:#6dd8f5;
+}
+
+.divider{
+  border:none;
+  border-top:1px solid rgba(67,97,238,0.2);
+  margin:12px 0;
+}
+
+.support-section{
+  text-align:center;
+  padding:10px 0 4px 0;
+}
+.support-text{
+  font-size:11px;
+  color:#666;
+  margin-bottom:8px;
+}
+.patreon-btn{
+  display:inline-block;
+  padding:9px 20px;
+  background:#FF424D;
+  color:white;
+  border-radius:6px;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:0.2px;
+  transition:background 0.15s ease;
+}
+.patreon-btn:hover{
+  background:#ff6068;
+}
+.opensource-note{
+  font-size:10px;
+  color:#555;
+  margin-top:8px;
+}
+</style>
+</head>
+<body>
+
+<h2>Unscroll</h2>
+<div class="tagline">Unscroll the internet.</div>
+<div class="version">v3.0 -- Free and open source</div>
+
+<div id="site-status" class="site-status site-active">
+  Checking...
+</div>
+
+<button id="toggle-site-btn" class="current-site-btn btn-disable">
+  Loading...
+</button>
+
+<hr class="divider">
+
+<div class="section">
+  <div class="section-title">Keyboard Shortcuts</div>
+  <div class="shortcut"><span class="shortcut-label">Next page</span><span><kbd>Right</kbd> <kbd>Space</kbd> <kbd>PgDn</kbd></span></div>
+  <div class="shortcut"><span class="shortcut-label">Previous page</span><span><kbd>Left</kbd> <kbd>PgUp</kbd></span></div>
+  <div class="shortcut"><span class="shortcut-label">First page</span><span><kbd>Home</kbd></span></div>
+  <div class="shortcut"><span class="shortcut-label">Last page</span><span><kbd>End</kbd></span></div>
+</div>
+
+<div class="section">
+  <div class="section-title">Disabled Sites</div>
+  <p style="font-size:11px;color:#888;margin-bottom:8px">
+    Unscroll will not run on these sites.
+  </p>
+
+  <div class="skip-input-row">
+    <input type="text" id="add-site-input" class="skip-input" placeholder="example.com">
+    <button id="add-site-btn" class="add-btn">Add</button>
+  </div>
+
+  <div id="skip-list" class="skip-list">
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="support-section">
+  <div class="support-text">
+    Unscroll is free forever. If it saves you time, consider supporting development.
+  </div>
+  <a href="https://www.patreon.com/joshforall" target="_blank" class="patreon-btn">
+    Support on Patreon
+  </a>
+  <div class="opensource-note">
+    Open source -- no tracking -- no ads -- no data collection
+  </div>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

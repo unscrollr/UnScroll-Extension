@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Unscroll - Unscroll the Internet",
+  "version": "3.0",
+  "description": "Eliminates infinite scroll from every website. Browse the web in pages, like reading a book. Free and open source.",
+  "permissions": ["storage", "activeTab", "tabs"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["noscroll.js"],
+      "css": ["noscroll.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

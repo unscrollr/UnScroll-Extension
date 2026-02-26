@@ -1,0 +1,15 @@
+html.noscroll-active,
+html.noscroll-active body {
+  overflow: hidden !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  scroll-behavior: auto !important;
+}
+
+#noscroll-wrapper {
+  position: relative !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
